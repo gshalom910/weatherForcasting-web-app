@@ -1,5 +1,5 @@
 .main-wrapper {
-  background-image: url(../images/background.jpg);
+  background-image: url(/background.565aafb9.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   margin-top: 7px;
@@ -46,7 +46,7 @@ section li h3 {
   text-align: center;
 }
 .card {
-  background-image: url(../images/background.jpg);
+  background-image: url(/background.565aafb9.jpg);
   background-repeat: no-repeat;
   background-size: contain;
   border-radius: 15px;
@@ -106,3 +106,6 @@ section span {
 #weather-description {
   text-transform: capitalize;
 }
+
+
+/*# sourceMappingURL=/styles.dd855970.css.map */
