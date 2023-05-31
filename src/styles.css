@@ -49,7 +49,7 @@ section li h3 {
   background-image: url(../images/background.jpg);
   background-repeat: no-repeat;
   background-size: contain;
-  border-radius: 18px;
+  border-radius: 20px;
 }
 .card-body {
   background-color: rgba(245, 248, 250, 0.514);
