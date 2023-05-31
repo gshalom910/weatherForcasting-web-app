@@ -54,7 +54,7 @@ section li h3 {
 .card-body {
   background-color: rgba(245, 248, 250, 0.514);
   backdrop-filter: blur(10px);
-  border-radius: 15px;
+  border-radius: 7px;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 section span {
