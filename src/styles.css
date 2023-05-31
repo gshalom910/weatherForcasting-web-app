@@ -1,0 +1,100 @@
+.main-wrapper {
+  background-image: url(../images/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 7px;
+  margin-bottom: 2px;
+  padding: 45px 10px 17px;
+  border-radius: 10px;
+}
+.inner-wrapper {
+  background-color: rgb(255 255 255 / 0.3);
+  backdrop-filter: blur(30px);
+  border-radius: 20px;
+  padding: 50px 0 10px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+section ul {
+  list-style: none;
+}
+section h1 {
+  color: rgb(24, 22, 22);
+  font-weight: 700;
+  text-transform: capitalize;
+}
+p {
+  color: #35373b;
+  font-size: 15px;
+  font-weight: 500;
+}
+section h3 {
+  color: rgb(12, 12, 12);
+  font-weight: 800;
+}
+section li h3 {
+  text-decoration: underline;
+  color: rgb(19, 18, 18);
+  font-weight: 700;
+  text-align: center;
+}
+.card {
+  background-image: url(../images/background.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 15px;
+}
+.card-body {
+  background-color: rgba(245, 248, 250, 0.514);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+section span {
+  color: #464647;
+  font-weight: 400;
+}
+.ms-n5 {
+  margin-left: -44px;
+}
+.temp-li {
+  color: black;
+  font-weight: 700;
+}
+#temp {
+  display: inline-block;
+}
+.units {
+  font-size: 16px;
+  color: black;
+  position: relative;
+  top: -14px;
+}
+.units a {
+  color: blue;
+  font-weight: 800;
+  text-decoration: none;
+  background-color: transparent;
+}
+.units a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.col-li {
+  color: #2a2a2b;
+  font-weight: 600;
+}
+.style-li {
+  font-size: 27px;
+  font-weight: 700;
+}
+#today {
+  line-height: 1.2;
+}
+#inner-date {
+  letter-spacing: 1.7px;
+  font-size: 17px;
+  color: rgb(17, 17, 17);
+}
+#weather-description {
+  text-transform: capitalize;
+}
