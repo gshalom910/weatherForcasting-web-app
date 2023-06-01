@@ -1,2 +1,2 @@
-# weatherForcasting-web-app
+# weatherForecasting-web-app
 Created with CodeSandbox
