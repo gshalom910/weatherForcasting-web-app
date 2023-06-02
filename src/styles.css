@@ -26,7 +26,11 @@ section h1 {
   text-decoration: none;
   font-size: 18px;
 }
+.coder a:hover {
+  text-decoration: underline;
+}
 .coder span {
+  font-size: 18px;
   color: rgb(97, 107, 119);
   font-weight: 700;
 }
@@ -96,11 +100,11 @@ section span {
   font-weight: 700;
 }
 #today {
-  line-height: 1.2;
+  line-height: 0.3;
 }
 #inner-date {
   letter-spacing: 1.7px;
-  font-size: 17px;
+  font-size: 16px;
   color: rgb(17, 17, 17);
 }
 #weather-description {
