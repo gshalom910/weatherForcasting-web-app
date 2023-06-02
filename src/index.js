@@ -1,3 +1,40 @@
+
+function getDate(date) {
+  let hours = date.getHours().toString();
+  let min = date.getMinutes().toString();
+  let dayIndex = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "April",
+    "May",
+    "June",
+    "July",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+  let monthIndex = date.getMonth();
+  let month = months[monthIndex];
+  let day = days[dayIndex];
+  let year = date.getFullYear();
+  // let currentDay = date.getDate().toString();
+  let clockFormat = `${day.padStart(2, "0")} ${hours.padStart(
+    2,
+    "0"
+  )} : ${min.padStart(2, "0")}`;
+  let dateFormat = `${month}, ${year}`;
+  let format = `<br> <p> ${clockFormat} </p> <p id="inner-date">  ${dateFormat} </p>`;
+  return format;
+}
+let currentDate = document.querySelector("#today");
+let now = new Date();
+currentDate.innerHTML = getDate(now);
+
 function getWeather(response) {
   let currenttemp = Math.round(response.data.main.temp);
   let currentCity = response.data.name;
@@ -6,6 +43,7 @@ function getWeather(response) {
   let currentPressure = response.data.main.pressure;
   // console.log(currentCity);
   let currentWind = response.data.wind.speed;
+  let mainIcon = response.data.weather[0].icon;
   // console.log(response.data);
   document.getElementById("temp").innerHTML = `${currenttemp}°C`;
   document.getElementById("cityName").innerHTML = currentCity;
@@ -13,6 +51,8 @@ function getWeather(response) {
   document.getElementById("humid").innerHTML = humidity;
   document.getElementById("pressure").innerHTML = currentPressure;
   document.getElementById("wind").innerHTML = Math.round(currentWind * 3.6);
+  document.getElementById("main-img").setAttribute("src", `http://openweathermap.org/img/wn/${mainIcon}@2x.png`);
+  document.getElementById("main-img").setAttribute("alt", desc);
 }
 function currentLocations(position) {
   let currentLat = position.coords.latitude;
@@ -35,11 +75,11 @@ currentBtn.addEventListener("click", getCurrent);
 function searchCity(event) {
   event.preventDefault();
   let city = document.querySelector("input[type = search]").value.toLowerCase();
-  document.getElementById("cityName").innerText = city;
+//   document.getElementById("cityName").innerHTML = city;
   let apiKey = "7784a4cd4aa2e0c25ead7bd96d585b8a";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
   axios.get(apiUrl).then(getWeather);
 }
 
 let search = document.querySelector("#searchForm");
-search.addEventListener("click", searchCity);
+search.addEventListener("submit", searchCity);
