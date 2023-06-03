@@ -1,4 +1,3 @@
-
 function getDate(date) {
   let hours = date.getHours().toString();
   let min = date.getMinutes().toString();
@@ -16,19 +15,19 @@ function getDate(date) {
     "Sept",
     "Oct",
     "Nov",
-    "Dec"
+    "Dec",
   ];
   let monthIndex = date.getMonth();
   let month = months[monthIndex];
   let day = days[dayIndex];
   let year = date.getFullYear();
-  // let currentDay = date.getDate().toString();
+  let currentDay = date.getDate().toString();
   let clockFormat = `${day.padStart(2, "0")} ${hours.padStart(
     2,
     "0"
   )} : ${min.padStart(2, "0")}`;
-  let dateFormat = `${month}, ${year}`;
-  let format = `<br> <p> ${clockFormat} </p> <p id="inner-date">  ${dateFormat} </p>`;
+  let dateFormat = `${month} ${currentDay.padStart(2, "0")}, ${year}`;
+  let format = `<p id="today"> ${clockFormat} <br>  ${dateFormat} </p>`;
   return format;
 }
 let currentDate = document.querySelector("#today");
@@ -36,7 +35,8 @@ let now = new Date();
 currentDate.innerHTML = getDate(now);
 
 function getWeather(response) {
-  let currenttemp = Math.round(response.data.main.temp);
+  celsiusTemp = response.data.main.temp;
+  let currentTemp = Math.round(celsiusTemp);
   let currentCity = response.data.name;
   let desc = response.data.weather[0].description;
   let humidity = response.data.main.humidity;
@@ -44,14 +44,16 @@ function getWeather(response) {
   // console.log(currentCity);
   let currentWind = response.data.wind.speed;
   let mainIcon = response.data.weather[0].icon;
-  // console.log(response.data);
-  document.getElementById("temp").innerHTML = `${currenttemp}°C`;
+  // console.log(mainIcon);
+  document.getElementById("temp").innerHTML = currentTemp;
   document.getElementById("cityName").innerHTML = currentCity;
   document.getElementById("weather-description").innerHTML = desc;
   document.getElementById("humid").innerHTML = humidity;
   document.getElementById("pressure").innerHTML = currentPressure;
   document.getElementById("wind").innerHTML = Math.round(currentWind * 3.6);
-  document.getElementById("main-img").setAttribute("src", `http://openweathermap.org/img/wn/${mainIcon}@2x.png`);
+  document
+    .getElementById("main-img")
+    .setAttribute("src", `http://openweathermap.org/img/wn/${mainIcon}@2x.png`);
   document.getElementById("main-img").setAttribute("alt", desc);
 }
 function currentLocations(position) {
@@ -72,14 +74,43 @@ function getCurrent(e) {
 let currentBtn = document.querySelector("#current-tmp");
 currentBtn.addEventListener("click", getCurrent);
 
-function searchCity(event) {
-  event.preventDefault();
-  let city = document.querySelector("input[type = search]").value.toLowerCase();
-//   document.getElementById("cityName").innerHTML = city;
+function searchCity(city1) {
+  // console.log(city1);
+  // document.getElementById("cityName").innerText = city;
   let apiKey = "7784a4cd4aa2e0c25ead7bd96d585b8a";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city1}&units=metric&appid=${apiKey}`;
   axios.get(apiUrl).then(getWeather);
 }
 
 let search = document.querySelector("#searchForm");
-search.addEventListener("submit", searchCity);
+search.addEventListener("submit", function (event) {
+  let city = document.querySelector("input[type = search]").value.toLowerCase();
+  searchCity(city);
+  event.preventDefault();
+});
+
+let celsiusTemp = null;
+
+function getFahTemp(e) {
+  e.preventDefault();
+  document.getElementById("temp").innerText = Math.round(
+    (celsiusTemp * 9) / 5 + 32
+  );
+  celsiusTemper.classList.remove("active");
+  fahrenheitTemp.classList.add("active");
+}
+
+let fahrenheitTemp = document.getElementById("fahrenheit-link");
+fahrenheitTemp.addEventListener("click", getFahTemp);
+
+function getCelsiusTemp(e) {
+  e.preventDefault();
+  document.getElementById("temp").innerText = Math.round(celsiusTemp);
+  celsiusTemper.classList.add("active");
+  fahrenheitTemp.classList.remove("active");
+}
+
+let celsiusTemper = document.getElementById("celsius-link");
+celsiusTemper.addEventListener("click", getCelsiusTemp);
+
+searchCity("Addis Ababa");
