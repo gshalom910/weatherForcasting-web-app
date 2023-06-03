@@ -1,3 +1,6 @@
+body {
+  min-width: 412px;
+}
 .main-wrapper {
   background-image: url(../images/background.jpg);
   background-repeat: no-repeat;
@@ -53,7 +56,7 @@ section li h3 {
   background-image: url(../images/background.jpg);
   background-repeat: no-repeat;
   background-size: contain;
-/*   border-radius: 22px; */
+  /*   border-radius: 22px; */
 }
 .card-body {
   background-color: rgba(245, 248, 250, 0.514);
@@ -66,7 +69,7 @@ section span {
   font-weight: 400;
 }
 .ms-n5 {
-  margin-left: -44px;
+  margin-left: -56px;
 }
 .temp-li {
   color: black;
@@ -79,10 +82,10 @@ section span {
   font-size: 16px;
   color: black;
   position: relative;
-  top: -14px;
+  top: -20px;
 }
 .units a {
-  color: blue;
+  color: rgb(35, 35, 250);
   font-weight: 800;
   text-decoration: none;
   background-color: transparent;
@@ -90,6 +93,13 @@ section span {
 .units a:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+.units .active {
+  color: rgb(24, 22, 22);
+}
+.units .active:hover {
+  text-decoration: none;
+  cursor: default;
 }
 .col-li {
   color: #2a2a2b;
@@ -100,13 +110,13 @@ section span {
   font-weight: 700;
 }
 #today {
-  line-height: 0.3;
+  line-height: 1.3;
 }
-#inner-date {
+/* #inner-date {
   letter-spacing: 1.7px;
   font-size: 16px;
-  color: rgb(17, 17, 17);
-}
+  
+} */
 #weather-description {
   text-transform: capitalize;
 }
