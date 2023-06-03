@@ -14,35 +14,46 @@
 <body>
   <div class="container coder my-2">
     <a href="https://github.com/gshalom910/weatherForcasting-web-app" target="_blank">
-    Open-Source Code,</a> <span> by Shalom Girma</span>
+    Open Source Code by</a> <span>Shalom Girma</span>
   </div>
   <div class="container main-wrapper">
     <div class="inner-wrapper">
       <form id="searchForm">
-        <div class="input-group px-5 px-md-5">
-          <input class="form-control mx-2 mx-md-3" type="search" placeholder="Enter City . . ." aria-label="Search" >
+        <div class="input-group pb-5 py-md-0 px-2 px-md-5">
+          <input class="form-control mx-2 mx-md-3" type="search" placeholder="Enter City . . ." aria-label="Search" autofocus="on">
           <span class="input-group-append">
             <button class="btn btn-outline-secondary  bg-white border-start-0 border-bottom-0 border ms-n5" type="button">
               <i class="fa fa-search"></i>
             </button>
           </span>
-	  <button class="btn btn-primary ms-2 ms-md-5 my-sm-0 px-4" type="submit">Search</button>
-	  <button class="btn btn-danger ms-1 ms-md-3 my-sm-0 px-2" id="current-tmp" type="submit">Current</button>
+	<button class="btn btn-primary my-0 ms-2 ms-md-5  px-2 px-md-4" type="submit">Search</button>
+	<button class="btn btn-danger my-0 ms-1 ms-md-3  px-1 px-md-2" id="current-tmp" type="submit">Current</button>
         </div>
       </form>
-      <section class="row m-5">
-        <div class="col-10">
+      <section class="mx-5 m-md-5">
+        <div class="row">
+        <div class="col-8 col-md-9 col-lg-10">
           <h1 id="cityName">
-	      Addis Ababa 
-	  </h1>	
-	  <p id="today">
-	      Sun 16 : 01 <br>
-              April 25, 2023
-	   </p>
-          <div class="row row-cols-sm-2">
-            <div class="col-4 col-md-3 col-lg-3">
+		Addis Ababa 
+	</h1>	
+	<p id="today">
+		<!-- Sun 16 : 01 <br>
+	April 25, 2023 -->
+	</p>
+	</span>
+        </div>
+        <div class="col-4 col-md-3 col-lg-2" >
+		<h1 id="temp">21</h1>
+		<span class="units">
+		<a href="#" id="celsius-link" class="active">℃</a> |
+		<a href="#" id="fahrenheit-link">℉</a>
+	 </span>
+         </div>
+         </div>
+         <div class="row ">
+            <div class="col-5 col-md-3">
               <div>
-                <img id = "main-img"src="./images/cloudy.png" alt="cloudy" width="53">
+                <img id="main-img" src="./images/cloudy.png" alt="cloudy" width="53">
               </div>
               <h3 id="weather-description">
                 Cloudy
@@ -60,15 +71,7 @@
               </li>
             </ul>
           </div>
-        </div>
-        <div class="col-2" >
-	<h1 id="temp">21°C</h1>
-	   <!-- <span class="units">
-	   <a href="#" id="celsius-link">℃</a> |
-	   <a href="#" id="fahrenheit-link">℉</a>
-           </span> -->
-	</h1>
-      </section>
+          </section>
       <section class="section2 row mx-4 my-1">
         <div class="col">
           <ul>
@@ -186,7 +189,7 @@
             </div>
           </ul>
         </div>
-        <div class="col-6 col-sm-4 col-md">
+        <div class=" col-6 col-sm-4 col-md">
           <ul>
             <li>
               <h3>
