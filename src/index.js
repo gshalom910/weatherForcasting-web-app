@@ -34,6 +34,51 @@ let currentDate = document.querySelector("#today");
 let now = new Date();
 currentDate.innerHTML = getDate(now);
 
+function formatDay(time) {
+  let date = new Date(time * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  // console.log(forecast);
+  let forecastSec = document.querySelectorAll("#forecast-sec h3");
+
+  forecastSec.forEach((heading, i) => {
+    if (i < 6) {
+      heading.innerText = `${formatDay(forecast[i + 1].dt)}`;
+      document.querySelectorAll("#forecast-sec i")[i].innerHTML = `<img
+          src="http://openweathermap.org/img/wn/${
+            forecast[i + 1].weather[0].icon
+          }@2x.png"
+          alt=""
+          width="46"
+        />`;
+      document.querySelectorAll("#forecast-sec .temp-li")[
+        i
+      ].innerHTML = `${Math.round(
+        forecast[i + 1].temp.max
+      )}° <span>${Math.round(forecast[i + 1].temp.min)}°</span>`;
+      let maxTemp = forecast[i].temp.max;
+      let minTemp = forecast[i].temp.min;
+      dailyForecast[maxTemp] = minTemp;
+    }
+  });
+}
+
+let dailyForecast = {};
+
+let x = document.getElementById("fahrenheit-link").classList.contains("active");
+
+function getForecast(pos) {
+  let apiKey = "7784a4cd4aa2e0c25ead7bd96d585b8a";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${pos.lat}&lon=${pos.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+  // console.log(apiUrl);
+}
+
 function getWeather(response) {
   celsiusTemp = response.data.main.temp;
   let currentTemp = Math.round(celsiusTemp);
@@ -44,7 +89,8 @@ function getWeather(response) {
   // console.log(currentCity);
   let currentWind = response.data.wind.speed;
   let mainIcon = response.data.weather[0].icon;
-  // console.log(mainIcon);
+  let coordinates = response.data.coord;
+  // console.log(response.data);
   document.getElementById("temp").innerHTML = currentTemp;
   document.getElementById("cityName").innerHTML = currentCity;
   document.getElementById("weather-description").innerHTML = desc;
@@ -53,8 +99,12 @@ function getWeather(response) {
   document.getElementById("wind").innerHTML = Math.round(currentWind * 3.6);
   document
     .getElementById("main-img")
-    .setAttribute("src", `http://openweathermap.org/img/wn/${mainIcon}@2x.png`);
+    .setAttribute(
+      "src",
+      `https://openweathermap.org/img/wn/${mainIcon}@2x.png`
+    );
   document.getElementById("main-img").setAttribute("alt", desc);
+  getForecast(coordinates);
 }
 function currentLocations(position) {
   let currentLat = position.coords.latitude;
@@ -91,6 +141,21 @@ search.addEventListener("submit", function (event) {
 
 let celsiusTemp = null;
 
+function changeForecastTemp() {
+  let forecastTemp = document.querySelectorAll("#forecast-sec .temp-li");
+  Object.entries(dailyForecast).forEach(([key, value], i) => {
+    if (fahrenheitTemp.classList.contains("active")) {
+      forecastTemp[i].innerHTML = `${Math.round(
+        (key * 9) / 5 + 32
+      )}° <span>${Math.round((value * 9) / 5 + 32)}°</span>`;
+    } else {
+      forecastTemp[i].innerHTML = `${Math.round(key)}° <span>${Math.round(
+        value
+      )}°</span>`;
+    }
+  });
+}
+
 function getFahTemp(e) {
   e.preventDefault();
   document.getElementById("temp").innerText = Math.round(
@@ -98,6 +163,7 @@ function getFahTemp(e) {
   );
   celsiusTemper.classList.remove("active");
   fahrenheitTemp.classList.add("active");
+  changeForecastTemp();
 }
 
 let fahrenheitTemp = document.getElementById("fahrenheit-link");
@@ -108,6 +174,7 @@ function getCelsiusTemp(e) {
   document.getElementById("temp").innerText = Math.round(celsiusTemp);
   celsiusTemper.classList.add("active");
   fahrenheitTemp.classList.remove("active");
+  changeForecastTemp();
 }
 
 let celsiusTemper = document.getElementById("celsius-link");
