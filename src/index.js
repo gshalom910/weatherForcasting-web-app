@@ -61,16 +61,9 @@ function displayForecast(response) {
       ].innerHTML = `${Math.round(
         forecast[i + 1].temp.max
       )}° <span>${Math.round(forecast[i + 1].temp.min)}°</span>`;
-      let maxTemp = forecast[i].temp.max;
-      let minTemp = forecast[i].temp.min;
-      dailyForecast[maxTemp] = minTemp;
     }
   });
 }
-
-let dailyForecast = {};
-
-let x = document.getElementById("fahrenheit-link").classList.contains("active");
 
 function getForecast(pos) {
   let apiKey = "7784a4cd4aa2e0c25ead7bd96d585b8a";
@@ -141,21 +134,6 @@ search.addEventListener("submit", function (event) {
 
 let celsiusTemp = null;
 
-function changeForecastTemp() {
-  let forecastTemp = document.querySelectorAll("#forecast-sec .temp-li");
-  Object.entries(dailyForecast).forEach(([key, value], i) => {
-    if (fahrenheitTemp.classList.contains("active")) {
-      forecastTemp[i].innerHTML = `${Math.round(
-        (key * 9) / 5 + 32
-      )}° <span>${Math.round((value * 9) / 5 + 32)}°</span>`;
-    } else {
-      forecastTemp[i].innerHTML = `${Math.round(key)}° <span>${Math.round(
-        value
-      )}°</span>`;
-    }
-  });
-}
-
 function getFahTemp(e) {
   e.preventDefault();
   document.getElementById("temp").innerText = Math.round(
@@ -163,7 +141,6 @@ function getFahTemp(e) {
   );
   celsiusTemper.classList.remove("active");
   fahrenheitTemp.classList.add("active");
-  changeForecastTemp();
 }
 
 let fahrenheitTemp = document.getElementById("fahrenheit-link");
@@ -174,7 +151,6 @@ function getCelsiusTemp(e) {
   document.getElementById("temp").innerText = Math.round(celsiusTemp);
   celsiusTemper.classList.add("active");
   fahrenheitTemp.classList.remove("active");
-  changeForecastTemp();
 }
 
 let celsiusTemper = document.getElementById("celsius-link");
